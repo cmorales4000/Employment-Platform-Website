@@ -1,0 +1,32 @@
+{% extends "practiapp/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+
+    <h2>Detalles de la Oferta</h2> <br>
+
+    <form method="POST" enctype="multipart/form-data"> {% csrf_token %}  
+        
+        
+        {{ form|crispy }}
+        
+            
+        
+        <input type="button" class="btn btn-primary" onclick="history.go(-1)" value="Volver">
+        <input type="submit" class="btn btn-primary" value="Publicar">
+        
+        
+    </form>
+
+
+{% endblock %}
+
+
+
+    
+        
+
+       

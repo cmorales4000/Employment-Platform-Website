@@ -1,0 +1,61 @@
+{% extends "practiapp/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<h2>Modificar Perfil</h2>
+
+<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+    <table>
+
+        <td><h3>Imagen Actual:</h3></td>
+        {% if user.imagen %}
+        <td><img src= {{ user.imagen.url }} width="50%"></td> <tr></tr> <br>
+        {% endif %}
+        
+        <td><br><h3>Es empleador? (Empresa):</h3></td>
+        <td>{{ form.is_empresa }}</td> <tr></tr>
+        <td><h3>Nombre de Usuario</h3></td>
+        <td>{{ form.username }}</td> <tr></tr>
+        <td><h3>Nombre Completo</h3></td>
+        <td>{{ form.nombre }}</td> <tr></tr>
+
+        {% if request.user.is_empresa is True %}
+        <td><h3>NIT</h3></td>
+        {% endif %}
+        {% if request.user.is_empresa is False %}
+        <td><h3>Cédula</h3></td>
+        {% endif %}
+        <td>{{ form.dni }}</td> <tr></tr>
+
+        <td><h3>Correo Electrónico</h3></td>
+        <td>{{ form.email }}</td> <tr></tr>
+        <td><h3>Teléfono</h3></td>
+        <td>{{ form.contacto }}</td> <tr></tr>
+
+        <td><h3>Imagen de Perfil</h3></td>
+        <td>{{ form.imagen }}</td> <tr></tr>
+
+        {% if request.user.is_empresa is False %}
+        <td><h3>Subir Hoja de Vida</h3></td>
+        <td>{{ form.hdv }}</td> <tr></tr>
+        {% endif %}
+
+        <td><br><h3>Contraseña*</h3></td>
+        <td>{{ form.password1 }}</td> <tr></tr>
+
+        <!-- {{ form.hdv.as_hidden }} -->
+
+        
+    </table>
+    
+    <input type="reset" class="btn btn-primary" value="Limpiar">
+    <input type="submit" class="btn btn-primary" value="Modificar">
+</form>
+
+{{mensaje}}
+<br>
+
+{% endblock %} 

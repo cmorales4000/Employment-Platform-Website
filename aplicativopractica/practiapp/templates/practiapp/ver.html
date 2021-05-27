@@ -1,0 +1,46 @@
+{% extends "practiapp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<br> <br>
+
+    {% for p in oferta %}
+
+        <h2>Titulo</h2>
+        <h3>{{p.titulo}}</h3><br>
+
+        <h2>Area</h2>
+        <h3>{{p.area}}</h3><br>
+
+        <h2>Ciudad</h2>
+        <h3>{{p.ciudad}}</h3><br>
+
+        <h2>Descripción</h2>
+        <h3>{{p.contenido}}</h3><br>
+
+        <h2>Salario</h2>
+        <h3>{{p.salario}}</h3><br>
+
+        <h2>Horario</h2>
+        <h3>{{p.horario}}</h3><br>
+
+        <h2>Empleador</h2>
+        <h3>{{p.empresa}}</h3><br>
+
+        {% if p.empresa.imagen %}
+        <img src={{ p.empresa.imagen.url }} width="10%"> <br>
+        {% endif %}
+
+        <br>
+        <h3>{{mensaje}}</h3>
+        <input type="button" class="btn btn-primary" onclick="history.go(-1)" value="Volver">
+        <a class="btn btn-primary" href="{% url 'aplicar' p.id %}">Aplicar</a>
+        <br>
+        
+
+    {% endfor %}
+
+
+{% endblock %} 

@@ -1,0 +1,117 @@
+<html>
+
+<head>
+
+    {% load pwa %}
+    {% progressive_web_app_meta %}
+
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="media/favicon.png"/>
+    
+    
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+
+    <!-- Fonts -->
+    
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+     
+
+    <!-- Styles -->
+    <link href="{% static 'practiapp/css/estilos.css' %}" rel="stylesheet">
+</head>
+
+
+
+<body>
+    
+    <!-- <h1 class="site-heading text-center text-white d-none d-lg-block">
+      <span class="site-heading-lower">Practiapp</span>
+    </h1> -->
+    <br><div class="centre"><h1>PractiApp</h1></div><br>
+
+    
+
+ <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container">
+      
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item {% if request.path == '/' %}active{% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'home' %}">Inicio</a>
+          </li>
+          {% if request.user.is_empresa is True %}
+          <li class="nav-item {% if request.path == '/listar' %}active{% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'listar' %}">Ofertas Publicadas</a>
+          </li>
+          
+          <li class="nav-item {% if request.path == '/agregar' %}active{% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'agregar' %}">Publicar Oferta</a>
+          </li>
+          {% endif %}
+          {% if request.user.is_empresa is False %}
+          <li class="nav-item {% if request.path == '/buscar' %}active{% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'buscar' %}">Buscar Ofertas</a>
+          </li>
+          <li class="nav-item {% if request.path == '/aplicadas' %}active{% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'aplicadas' %}">Solicitudes</a>
+          </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+          <li class="nav-item {% if request.path == '/perfil' %}active{% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'perfil' %}">Perfil</a>
+          </li>
+          <li>
+            <a class="nav-link text-uppercase text-expanded" href="">Usuario: {{ user.username }}</a>
+          </li>
+          <li>
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'logout' %}">Logout</a>
+          </li>
+          
+          {% else %}
+          <li class="nav-item {% if request.path == '/login/' %}active{% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item {% if request.path == '/registro' %}active{% endif %} px-lg-4"> 
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'registro' %}">Registrar</a>
+          </li>
+          {% endif %}
+         
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+   <!--CONTENIDO-->
+  
+  <div class="container">
+    <br>
+    {% block content %}
+    
+    {% endblock %}
+    <br>
+  </div>
+  
+
+</body>
+
+<!-- Footer -->
+<footer class="footer text-faded text-center py-1">
+  <div class="container">
+    
+    <p class="m-0 mbt">
+      <a href="#" class="link">Política de privacidad</a> ·
+      <a href="#" class="link">Aviso legal</a> ·
+      <a href="#" class="link">Cookies</a>
+    </p>
+    <p class="m-0 mbt1">&copy; Todos los derechos 2020</p>
+  </div>
+</footer>
+
+</html>

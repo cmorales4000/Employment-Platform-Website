@@ -1,0 +1,54 @@
+{% extends "practiapp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h2>Listado de Interesados en la Oferta</h2> <br>
+
+{% if aplicantes %}
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Contacto</th>
+            <th>Imagen de Perfil</th>
+            <th>Hoja de Vida</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        {% for a in aplicantes %}
+        <tr>
+            <td>{{ a.aplicante.nombre }}</td>
+            <td>{{ a.aplicante.email }}</td>
+            <td>{{ a.aplicante.contacto }}</td>
+
+            {% if a.aplicante.imagen %}
+            <td><img src= {{ a.aplicante.imagen.url }} width="10%"></td>
+            {% else %}
+            <td>None</td>
+            {% endif %}
+
+            {% if a.aplicante.hdv %}
+            <td><a  class="btn btn-primary" href={{ a.aplicante.hdv.url }} download>Descargar</a></td>
+            {% else %}
+            <td>None</td>
+            {% endif %} 
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+            
+</table>
+{% else %}
+<h2>No hay Aplicantes hasta el momento</h2>
+{% endif %}
+
+<input type="button" class="btn btn-primary" onclick="history.go(-1)" value="Volver">
+<br>
+
+{% endblock %} 
