@@ -1,0 +1,52 @@
+{% extends "practiapp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h2>Listado de Ofertas</h2> <br>
+
+<form action="" method="get">
+    {{myfilter.form}}
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Area</th>
+                    <th>Ciudad</th>
+                    <th>Salario</th>
+                    <th>Empleador</th>
+                    <th>Ver</th>
+                </tr>
+                </thead>
+                {% for p in ofertas %}
+
+                <tr>
+                    <td>{{ p.titulo }}</td>
+                    <td>{{ p.area }}</td>
+                    <td>{{ p.ciudad }}</td>
+                    <td>{{ p.salario }}</td>
+                    <td>{{ p.empresa }}</td>
+                    
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'ver' p.id %}">Visualizar</a>
+                    </td>
+
+                </tr>
+                
+                {% endfor %}
+            </table>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %} 
